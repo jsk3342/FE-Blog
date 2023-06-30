@@ -10,38 +10,23 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: '개발',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
-      </>
-    ),
+    description: <>생활속에서 필요한 가치를 찾아내고, 문제를 정의하고, 해결하는 개발자 입니다.</>,
   },
   {
-    title: 'Focus on What Matters',
+    title: '기록',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
-    ),
+    description: <>지나온 시간들의 기록과 앞으로 같은 길을 가려는 사람들을 위한 기록을 남깁니다.</>,
   },
   {
-    title: 'Powered by React',
+    title: '함께 자라기',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
-    ),
+    description: <>혼자만의 성장이 아닌 공유를 통하여 함께 자라기를 추구합니다. 지식의 가치는 나눌수록 거대해집니다.</>,
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, Svg, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">

@@ -83,8 +83,6 @@ class ErrorBoundary extends React.Component {
 
 ![리액트 클래스 컴포넌트 라이프 사이클](image-1.png)
 
-보통 함수형 컴포넌트로 작성하다 class로 작성되어 어색하긴 하지만, 코드의 핵심을 이해하기 위해서는 React Component의 생명주기에 대한 배경 지식이 필요합니다.
-
 버전마다 약간의 차이는 있지만 리액트 Component의 생명주기는 실행 이벤트 관점에서 mount, update, unmount로 구분 할 수 있으며, 실행 단계 관점에서는 랜더링 이전, 업데이트 반영 전, 업데이트 반영 후 3단계로 구분 할 수 있습니다. 버전별 일반 생명주기 메서드 표는 아래 링크를 참고하세요.
 
 **react-lifecycle-methods-diagram : http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/**

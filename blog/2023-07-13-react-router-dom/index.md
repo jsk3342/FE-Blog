@@ -375,3 +375,7 @@ Routes와 Route: Routes는 모든 Route를 포함해야 합니다. Route는 Rout
 ## 정리 및 결론
 
 이 글에서는 리액트 라우터 돔의 핵심 컴포넌트인 BrowserRouter, Routes, Route에 대해 알아보았습니다. 이들은 프론트엔드 라우팅을 구현하는 데 필수적이며, SPA에서 페이지 간 이동을 관리하는 데 효과적입니다.
+
+## References
+
+[jundev](https://jundev.vercel.app/react%EC%99%80-history-api%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-react-router-dom-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0#e72023a134784bd3ad15aa64f499470b)

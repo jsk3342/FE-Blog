@@ -28,6 +28,9 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout title={`Hello from ${siteConfig.title}`} description="Description will go into a meta tag in <head />">
+      <head>
+        <meta name="google-site-verification" content="pce9lH5rQ8-n1EMK6Hs9b2tyugun55v-wQ_t7nRhLVk" />
+      </head>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

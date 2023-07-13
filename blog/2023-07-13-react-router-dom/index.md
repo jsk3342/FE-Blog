@@ -1,9 +1,9 @@
 ---
 date: 2023-07-13T18:32
 authors: Jisu Kim
-title: '리액트 라우터 돔(Router DOM) 깊게 이해하기: BrowserRouter, Routes, Route'
-description: '리액트 라우터 돔(Router DOM) 깊게 이해하기: BrowserRouter, Routes, Route'
-keywords: ['React', 'BrowserRouter', 'Routes', 'Route', 'Router', 'DOM', 'react-router-dom']
+title: '리액트 라우터 돔(Router DOM) 깊게 이해하기: BrowserRouter, Routes, Route, Link'
+description: '리액트 라우터 돔(Router DOM)에 자주 사용되는 컴포넌트들의 동작 원리를 이해하고 사용하는 방법에 대해 알아봅니다.'
+keywords: ['React', 'BrowserRouter', 'Routes', 'Route', 'Router', 'DOM', 'react-router-dom', 'Link']
 tags:
   - React
   - react-router-dom
@@ -19,6 +19,7 @@ tags:
 - [BrowserRouter의 주요 메소드와 프로퍼티](#BrowserRouter의-주요-메소드와-프로퍼티)
 - [Routes](#Routes)
 - [Route의 개념 및 역할](#Route의-개념-및-역할)
+- [Link 개념 및 역할](#Link-개념-및-역할)
 - [실제 적용 예시](#실제-적용-예시)
 - [주의 사항 및 자주 하는 실수](#주의-사항-및-자주-하는-실수)
 - [정리 및 결론](#정리-및-결론)
@@ -99,8 +100,6 @@ function App() {
 위 코드에서 **`createBrowserHistory`** 함수는 **`history`** 라이브러리에서 제공하는 함수로, 새로운 히스토리 객체를 생성합니다. 이 객체를 **`Router`** 컴포넌트에 전달함으로써 라우터의 동작을 커스텀할 수 있습니다.
 
 이렇게 함으로써 **`BrowserRouter`**를 확장하여, 애플리케이션의 요구사항에 맞는 라우팅 동작을 구현할 수 있습니다.
-
-history 라이브러리 링크 남겨주기
 
 ## **BrowserRouter의 주요 메소드와 프로퍼티**
 
@@ -333,6 +332,94 @@ function PrivateRoute({ component: Component, ...rest }) {
 - **`render`**: 이 prop을 통해 인라인 렌더링 함수를 지정할 수 있습니다. 이는 **`component`** prop 대신 특정 상황에서 컴포넌트를 렌더링하려는 경우에 유용합니다.
 
 또한, **`Route`** 내부에서는 **`useRouteMatch`**와 같은 React Router의 훅을 이용하여 현재 라우트의 상태를 얻을 수 있습니다. 이를 통해 라우트에 따라 동적으로 데이터를 불러오는 등의 로직을 구현할 수 있습니다.
+
+## **Link 개념 및 역할**
+
+**`Link`** 컴포넌트는 사용자가 애플리케이션 내의 다른 페이지로 이동할 수 있는 하이퍼링크를 생성하는 React Router의 컴포넌트입니다. **`Link`** 컴포넌트는 웹 애플리케이션의 내비게이션을 간편하게 관리할 수 있게 도와주며, 페이지 리로드 없이 빠르게 이동하는 클라이언트 사이드 라우팅을 가능하게 합니다.
+
+### `Link` 사용 예시
+
+```jsx
+import { Link } from 'react-router-dom';
+
+function Navigation() {
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/contact">Contact</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+}
+```
+
+위 예시에서는 **`Link`** 컴포넌트를 사용하여 Home, About, Contact 페이지로의 링크를 생성하였습니다. **`to`** prop에 전달된 경로는 각 페이지의 URL에 해당합니다.
+
+### 동작 원리
+
+**`Link`** 컴포넌트는 내부적으로 HTML의 **`<a>`** 태그를 사용하여 구현되지만, 기본적인 **`<a>`** 태그와는 다르게 페이지 전체를 새로고침하지 않습니다. 대신, 클릭 시에 브라우저의 히스토리 스택에 새로운 엔트리를 추가하고, 해당 경로에 매칭되는 **`Route`** 컴포넌트를 렌더링합니다. 이렇게 함으로써 SPA(Single Page Application)에서 원활한 페이지 전환 경험을 제공합니다.
+
+리액트 라우터에서 **`Link`** 컴포넌트는 내부적으로 **`history.push`** 또는 **`history.replace`** 메소드를 사용하여 브라우저의 히스토리를 업데이트하고, 이를 통해 브라우저의 주소를 변경합니다. 이 메소드들은 브라우저의 History API를 활용하여 페이지를 리로드하지 않고도 주소를 변경할 수 있게 합니다.
+
+다음은 간단한 **`Link`** 컴포넌트의 구현 예입니다.
+
+```jsx
+import { useContext } from 'react';
+import { RouterContext } from './RouterContext';
+
+function Link({ to, replace, children }) {
+  const { history } = useContext(RouterContext);
+
+  const handleClick = (event) => {
+    event.preventDefault();
+
+    if (replace) {
+      history.replace(to);
+    } else {
+      history.push(to);
+    }
+  };
+
+  return (
+    <a href={to} onClick={handleClick}>
+      {children}
+    </a>
+  );
+}
+```
+
+위 예시에서, **`Link`** 컴포넌트는 클릭 이벤트가 발생했을 때 **`history.push`** 또는 **`history.replace`** 메소드를 호출하고, 이에 따라 브라우저의 주소가 변경됩니다. 이 때, **`event.preventDefault`**를 호출함으로써 브라우저의 기본 동작인 페이지 리로드를 방지합니다.
+
+이렇게 구현된 **`Link`** 컴포넌트는 **`a`** 태그와 비교했을 때 페이지를 리로드하지 않고도 브라우저의 주소를 변경할 수 있다는 점에서 큰 차이를 보입니다. 또한, **`Link`** 컴포넌트는 **`Route`** 컴포넌트와 함께 사용되어 SPA에서 원활한 라우팅을 제공합니다.
+
+**`Link`** 컴포넌트를 커스텀하는 방법으로는 **`Link`** 컴포넌트에 스타일이나 클래스를 추가하는 것, **`Link`** 컴포넌트를 감싸는 고차 컴포넌트를 작성하는 것 등이 있습니다. 이를 통해 **`Link`** 컴포넌트의 동작을 그대로 유지하면서도 추가적인 기능을 제공하거나 디자인을 변경할 수 있습니다.
+
+### 상세 옵션과 사용 팁
+
+**`Link`** 컴포넌트는 **`to`** prop 외에도 **`replace`**, **`innerRef`** 등의 추가적인 props를 지원합니다. **`replace`** prop을 **`true`**로 설정하면, 클릭 시 히스토리 스택에 새 엔트리를 추가하는 대신 현재의 엔트리를 교체합니다. **`innerRef`** prop은 **`Link`** 컴포넌트의 DOM 노드에 대한 참조를 얻는데 사용할 수 있습니다.
+
+:::tip
+
+### Link 컴포넌트와 a태그의 차이점
+
+**`Link`** 컴포넌트와 **`a`** 태그의 가장 중요한 차이점은 브라우저의 상태를 어떻게 처리하는지에 있습니다.
+
+**`a`** 태그는 HTML에서 제공하는 기본 요소로, 클릭 시 지정된 URL로 이동합니다. 하지만 이렇게 이동하게 되면 현재 페이지는 완전히 종료되고 새로운 페이지가 로드됩니다. 이는 말 그대로 페이지를 완전히 새로고침하는 것으로, 이 과정에서 현재 페이지의 상태는 완전히 사라지게 됩니다. 이는 Single Page Application(SPA)의 컨셉에 부합하지 않습니다. SPA는 페이지를 새로고침하지 않고도 원활한 사용자 경험을 제공하는 것이 목표이기 때문입니다.
+
+반면, **`Link`** 컴포넌트는 페이지를 새로고침하지 않고도 주소를 변경할 수 있습니다. 이는 브라우저의 History API를 활용하여 주소만 변경하며, 이 과정에서 현재 페이지의 상태를 그대로 유지합니다. 따라서 사용자는 페이지 이동 과정에서 상태가 유지되는 것을 확인할 수 있습니다.
+
+또한, **`Link`** 컴포넌트는 SPA에 최적화된 방식으로 페이지 이동을 처리하기 때문에, **`Route`** 컴포넌트와 함께 사용될 때 강력한 라우팅 기능을 발휘합니다. 즉, 사용자가 **`Link`** 컴포넌트를 클릭하면 해당 경로를 렌더링하는 **`Route`** 컴포넌트가 활성화되며, 이 과정에서 페이지를 새로고침하지 않고도 브라우저의 주소를 변경하고 새로운 내용을 렌더링할 수 있습니다.
+
+따라서, 리액트 기반의 웹 애플리케이션에서는 라우팅과 상태 관리를 효율적으로 처리하기 위해 **`a`** 태그 대신 **`Link`** 컴포넌트를 사용하는 것이 일반적입니다. 이를 통해 SPA의 주요 목표인 사용자 경험의 향상을 이룰 수 있습니다.
+:::
 
 ## 실제 적용 예시
 

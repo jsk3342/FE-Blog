@@ -393,9 +393,7 @@ function MyForm() {
       <Controller
         control={control}
         name="birthday"
-        render={({ field }) => (
-          <DatePicker selected={field.value} onChange={(date) => field.onChange(date)} dateFormat="MM/dd/yyyy" />
-        )}
+        render={({ field }) => <DatePicker {...field} selected={field.value} dateFormat="MM/dd/yyyy" />}
       />
       <input type="submit" />
     </form>

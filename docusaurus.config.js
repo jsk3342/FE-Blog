@@ -7,7 +7,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'FE Tech Talk',
-  tagline: '개발 이야기',
+  tagline:
+    '개발 이야기\n 안녕하세요! 크몽으로 거래하게 되면 수수료 때문에 직접 거래하는게 좋을 것 같아서요! 010-4472-3342 이쪽으로 연락 부탁 드립니다!',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

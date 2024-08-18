@@ -3,6 +3,7 @@ date: 2024-06-27T18:32
 authors: Jisu Kim
 title: '1장-연산자 조합의 평가'
 description: 'SICP 자바스크립트'
+category: 'SICP'
 keywords: ['SICP 자바스크립트', '자바스크립트', '프로그래밍 기본 요소', '함수', '데이터']
 tags:
   - SICP 자바스크립트

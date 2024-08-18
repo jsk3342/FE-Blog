@@ -3,6 +3,7 @@ date: 2024-06-26T18:32
 authors: Jisu Kim
 title: '1장-프로그래밍의 기본 요소'
 description: 'SICP 자바스크립트'
+category: 'SICP'
 keywords: ['SICP 자바스크립트', '자바스크립트', '프로그래밍 기본 요소', '함수', '데이터']
 tags:
   - SICP 자바스크립트

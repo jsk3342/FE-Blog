@@ -3,6 +3,7 @@ date: 2024-06-25T18:32
 authors: Jisu Kim
 title: '1장-자바스크립트 개요와 역사'
 description: 'SICP 자바스크립트'
+category: 'SICP'
 keywords: ['SICP 자바스크립트', '자바스크립트 역사', '함수형 프로그래밍', 'ECMAScript', 'Node.js']
 tags:
   - SICP 자바스크립트

@@ -39,15 +39,13 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          blogSidebarCount: 'ALL', // 사이드바에 모든 블로그 포스트를 표시
+          blogSidebarTitle: 'All Posts', // 사이드바 제목 설정
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

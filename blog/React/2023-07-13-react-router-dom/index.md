@@ -3,6 +3,7 @@ date: 2023-07-13T18:32
 authors: Jisu Kim
 title: '리액트 라우터 돔(Router DOM) 깊게 이해하기: BrowserRouter, Routes, Route, Link'
 description: '리액트 라우터 돔(Router DOM)에 자주 사용되는 컴포넌트들의 동작 원리를 이해하고 사용하는 방법에 대해 알아봅니다.'
+category: 'React'
 keywords: ['React', 'BrowserRouter', 'Routes', 'Route', 'Router', 'DOM', 'react-router-dom', 'Link']
 tags:
   - React

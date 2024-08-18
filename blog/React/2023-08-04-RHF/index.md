@@ -3,6 +3,7 @@ date: 2023-08-04T18:32
 authors: Jisu Kim
 title: '복잡한 폼을 단순하게 만들어 줄 리액트 훅 폼'
 description: '리액트 훅 폼을 통해 복잡한 폼 관리를 어떻게 쉽게 할 수 있는지 알아봅니다.'
+category: 'React'
 keywords: ['React', 'React Hook Form', 'Form Management', 'JavaScript', 'Web Development']
 tags:
   - React

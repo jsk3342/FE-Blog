@@ -36,7 +36,6 @@ const createSubCategoryItem = (category, subCategory) => ({
   items: getFilesOf(`docs/${category}/${subCategory}`).map((fileName) => `${category}/${subCategory}/${fileName}`),
 });
 
-// 카테고리 별로 서브 카테고리의 중첩된 사이드바를 구성
 module.exports = categories.reduce(
   (sidebars, category) => ({
     ...sidebars,

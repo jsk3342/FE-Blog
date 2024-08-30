@@ -62,12 +62,7 @@ const config = {
       navbar: {
         title: 'FE Tech Talk',
         items: [
-          {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Docs',
-          },
+          { to: '/docs/dev/', label: '개발', position: 'left' },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/facebook/docusaurus',

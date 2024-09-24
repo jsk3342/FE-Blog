@@ -197,6 +197,7 @@ const h1NodeList = document.querySelectorAll('h1');
 **예시 코드**
 
 ![노드리스트](nodelist.png)
+![노드리스트](nodelist2.png)
 
 ```javascript
 // 초기 상태에서 h1 요소 수 확인
@@ -338,6 +339,30 @@ const element = (
     <p>This is a sample paragraph.</p>
   </div>
 );
+```
+
+#### 요소명에 대문자를 사용하는 이유
+
+JSX에서 **요소명을 대문자로 시작**하는 것은 중요한 규칙이며, 이는 기본 HTML 태그와 사용자 정의 컴포넌트를 구분하기 위한 내부적인 규칙입니다.
+
+- **소문자로 시작하는 요소명**: 표준 HTML 태그를 나타냅니다.
+  - 예: `<div>`, `<span>`, `<h1>` 등
+- **대문자로 시작하는 요소명**: 사용자 정의 컴포넌트(커스텀 컴포넌트)를 나타냅니다.
+  - 예: `<MyComponent />`, `<Header />`, `<Button />` 등
+
+이러한 규칙을 따르는 이유는 다음과 같습니다.
+
+- **미래의 HTML 태그와의 충돌 방지**: HTML 표준은 지속적으로 발전하며 새로운 태그가 추가될 수 있습니다. 요소명을 대문자로 시작하면 향후 추가될 수 있는 HTML 태그와 커스텀 컴포넌트를 명확하게 구분할 수 있습니다.
+- **컴파일러의 올바른 변환 지원**: Babel과 같은 트랜스파일러는 요소명의 첫 글자를 기반으로 해당 요소를 문자열(HTML 태그)로 처리할지, 변수(컴포넌트)로 처리할지 결정합니다.
+
+예시:
+
+```jsx
+// 소문자로 시작하는 요소명은 문자열로 처리되어 HTML 태그로 변환됩니다.
+const element = <div className="container"></div>;
+
+// 대문자로 시작하는 요소명은 변수로 처리되어 해당 컴포넌트를 참조합니다.
+const element = <MyComponent />;
 ```
 
 ### 4.2 Babel 등의 컴파일러 역할
@@ -484,18 +509,19 @@ JSX의 도입은 React 개발에 큰 전환점이 되었으며, 개발자들에�
 
 ## 참고 자료
 
-- [초기 리액트 0.3.0 버전](https://github.com/facebook/react/releases/tag/v0.3.0)
 - [브라우저는 어떻게 동작하는가?](https://d2.naver.com/helloworld/59361)
+- [Blink (Rendering Engine)](https://www.chromium.org/blink/)
+- [Blink - MDN Web Docs 용어 사전: 웹 용어 정의 | MDN](https://developer.mozilla.org/ko/docs/Glossary/Blink)
 - [웹페이지를 표시한다는 것: 브라우저는 어떻게 동작하는가 - 웹 성능 | MDN](https://developer.mozilla.org/ko/docs/Web/Performance/How_browsers_work)
 - ["async" | Can I use... Support tables for HTML5, CSS3, etc](https://caniuse.com/?search=async)
-- [Blink - MDN Web Docs 용어 사전: 웹 용어 정의 | MDN](https://developer.mozilla.org/ko/docs/Glossary/Blink)
-- [Blink (Rendering Engine)](https://www.chromium.org/blink/)
-- [babel jsx 실제 트렌스파일 과정](https://babeljs.io/repl#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=MYewdgzgLgBApgGzgWzmWBeGAeAFgRhmAQEMIIA5E1DAIgHMAnOOKASzHtoD4AJRBCAA0MAO4hGCACYBCbAHoC3ANxA&debug=false&forceAllTransforms=false&modules=false&shippedProposals=false&evaluate=false&fileSize=false&timeTravel=false&sourceType=script&lineWrap=true&presets=env%2Creact&prettier=false&targets=&version=7.25.6&externalPlugins=&assumptions=%7B%7D)
-- [리액트 원년 멤버의 리액트 사용법](https://github.com/petehunt/react-howto/blob/master/README-ko.md)
-- [OSCON 2014: How Instagram.com Works; Pete Hunt](https://www.youtube.com/watch?v=VkTCL6Nqm6Y)
+- [Model-View-ViewModel - .NET](https://learn.microsoft.com/ko-kr/dotnet/architecture/maui/mvvm)
+- [초기 리액트 0.3.0 버전](https://github.com/facebook/react/releases/tag/v0.3.0)
 - [JSX 소개 – React](https://ko.legacy.reactjs.org/docs/introducing-jsx.html)
 - [Introducing the New JSX Transform – React Blog](https://ko.legacy.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#whats-a-jsx-transform)
+- [리액트 원년 멤버의 리액트 사용법](https://github.com/petehunt/react-howto/blob/master/README-ko.md)
+- [babel jsx 실제 트렌스파일 과정](https://babeljs.io/repl#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=MYewdgzgLgBApgGzgWzmWBeGAeAFgRhmAQEMIIA5E1DAIgHMAnOOKASzHtoD4AJRBCAA0MAO4hGCACYBCbAHoC3ANxA&debug=false&forceAllTransforms=false&modules=false&shippedProposals=false&evaluate=false&fileSize=false&timeTravel=false&sourceType=script&lineWrap=true&presets=env%2Creact&prettier=false&targets=&version=7.25.6&externalPlugins=&assumptions=%7B%7D)
 - [JSX로 마크업 작성하기 – React](https://ko.react.dev/learn/writing-markup-with-jsx)
+- [OSCON 2014: How Instagram.com Works; Pete Hunt](https://www.youtube.com/watch?v=VkTCL6Nqm6Y)
 - [Interactivity and Dynamic UIs | React](https://shripadk.github.io/react/docs/interactivity-and-dynamic-uis.html)
 - [Exploring ES6](https://exploringjs.com/es6/index.html)
 - [React Starter Projects](https://www.javascriptstuff.com/react-starter-projects/)

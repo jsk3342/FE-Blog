@@ -63,7 +63,6 @@ const config = {
         title: 'FE Tech Talk',
         items: [
           { to: '/docs/dev/', label: '개발', position: 'left' },
-          { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',

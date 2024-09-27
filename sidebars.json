@@ -17,13 +17,21 @@
     },
     {
       "type": "category",
+      "label": "Git",
+      "items": [
+        "dev/Git/2024-09-01-gitDive/index"
+      ]
+    },
+    {
+      "type": "category",
       "label": "React",
       "items": [
         {
           "type": "category",
           "label": "createReact",
           "items": [
-            "dev/React/createReact/2024-09-24-createReact01/index"
+            "dev/React/createReact/2024-09-24-createReact01/index",
+            "dev/React/createReact/2024-09-25-createReact02/index"
           ]
         },
         "dev/React/2023-07-03-Zod-error-boundary/index",
@@ -39,6 +47,7 @@
         "dev/SICP/2024-06-26-1-1장-프로그래밍-기본요소/index",
         "dev/SICP/2024-06-27-1-1장-함수를 이용한 추상화/index"
       ]
-    }
+    },
+    "dev/index"
   ]
 }

@@ -495,7 +495,7 @@ React의 Fiber 아키텍처는 **Lane 모델**을 도입하여 작업의 우선�
 
 Fiber 아키텍처에서는 다양한 작업을 효율적으로 처리하기 위해 작업의 **우선순위 결정(Task Prioritization)**과 **작업 배치(Task Batching)**를 중요한 개념으로 도입했습니다. 이를 통해 React는 사용자 경험을 저해하지 않으면서도 복잡한 UI를 효율적으로 관리할 수 있습니다.
 
-### 작업 우선순위 결정 기준
+#### 작업 우선순위 결정 기준
 
 작업의 우선순위를 결정하는 것은 사용자 경험과 애플리케이션의 성능에 직접적인 영향을 미칩니다. Fiber 아키텍처에서는 다음과 같은 기준에 따라 작업의 우선순위를 결정합니다:
 
@@ -614,7 +614,7 @@ Lane 모델에서는 작업을 **Batching Lane**으로 분류하여, 비슷한 �
    - UI의 전환과 관련된 작업을 처리하는 Lane.
    - 예: `useTransition`을 사용한 상태 업데이트, Suspense 컴포넌트의 로딩 상태 관리.
 
-### Lane Type의 우선순위 결정
+#### Lane Type의 우선순위 결정
 
 Lane 모델은 각 Lane의 우선순위를 비트마스크로 관리하여, 우선순위가 높은 Lane부터 처리할 수 있도록 합니다. 이는 Fiber 아키텍처가 다양한 작업을 효율적으로 스케줄링하고 처리하는 데 중요한 역할을 합니다.
 
@@ -632,144 +632,7 @@ const TransitionLane = 0b1000; // 최하위 순위
 - **효율적인 스케줄링:** Lane별로 작업을 효율적으로 스케줄링하여, 높은 우선순위의 작업이 먼저 처리되도록 보장합니다.
 - **동시성 지원:** 여러 Lane을 동시에 관리할 수 있어, 복잡한 애플리케이션에서도 높은 성능을 유지할 수 있습니다.
 
-### 5.5 Lane 모델과 스케줄링의 상호 작용
-
-Lane 모델과 스케줄링 시스템은 밀접하게 연관되어 있으며, 함께 작동하여 React가 다양한 우선순위의 작업을 효율적으로 처리할 수 있도록 합니다.
-
-1. **Lane 선택:**
-   - Fiber 아키텍처는 현재 처리할 Lane을 선택합니다. 이는 우선순위가 높은 Lane부터 선택됩니다.
-   - 선택된 Lane에 속한 FiberNodes는 스케줄링 큐에 추가됩니다.
-2. **스케줄링 큐 처리:**
-   - React는 스케줄링 큐에 있는 작업들을 순차적으로 처리합니다.
-   - 높은 우선순위의 작업이 먼저 처리되며, 낮은 우선순위의 작업은 나중에 처리됩니다.
-3. **비동기 처리:**
-   - 스케줄링은 비동기적으로 이루어지며, 이는 메인 스레드의 블로킹을 방지하고, 사용자 인터랙션에 대한 빠른 응답성을 유지합니다.
-   - React는 작업을 작은 단위로 나누어 처리하여, 긴 작업이 메인 스레드를 블로킹하지 않도록 합니다.
-
-### 5.6 실제 사례: `useTransition`과 `Suspense`의 Lane 모델 활용
-
-`useTransition`과 `Suspense`는 Lane 모델과 스케줄링 시스템을 활용하여, React 애플리케이션에서 비동기 작업을 효율적으로 처리하고, 사용자 경험을 향상시키는 중요한 기능들입니다.
-
-#### `useTransition`의 Lane 모델 활용
-
-- **낮은 우선순위 Lane 할당:** `useTransition`을 통해 시작된 상태 업데이트는 `TransitionLane`에 할당됩니다. 이는 높은 우선순위 작업을 방해하지 않도록 낮은 우선순위로 처리됩니다.
-- **스케줄링:** TransitionLane에 속한 작업은 높은 우선순위의 작업이 먼저 처리된 후에 처리됩니다. 이를 통해 사용자 인터랙션의 응답성을 유지합니다.
-
-```jsx
-import React, { useState, useTransition } from 'react';
-
-function App() {
-  const [isPending, startTransition] = useTransition();
-  const [inputValue, setInputValue] = useState('');
-  const [filteredList, setFilteredList] = useState([]);
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
-    startTransition(() => {
-      const newFilteredList = filterList(value);
-      setFilteredList(newFilteredList);
-    });
-  };
-
-  return (
-    <div>
-      <input type="text" value={inputValue} onChange={handleChange} />
-      {isPending && <p>Loading...</p>}
-      <FilteredList items={filteredList} />
-    </div>
-  );
-}
-
-function filterList(input) {
-  // 대규모 데이터 집합에서 필터링 작업
-  const allItems = [...Array(100000).keys()].map((i) => `Item ${i}`);
-  return allItems.filter((item) => item.includes(input));
-}
-
-function FilteredList({ items }) {
-  return (
-    <ul>
-      {items.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
-    </ul>
-  );
-}
-
-export default App;
-```
-
-- **설명:**
-  - `startTransition`을 사용하여, 필터링 작업을 `TransitionLane`에 할당된 낮은 우선순위로 처리합니다.
-  - `isPending` 상태를 통해 로딩 스피너를 표시하여, 사용자가 작업이 진행 중임을 인지할 수 있습니다.
-  - 높은 우선순위의 사용자 입력 작업은 즉각적으로 처리되어, UI의 응답성이 유지됩니다.
-
-#### `Suspense`의 Lane 모델 활용
-
-- **데이터 로딩 관리:** `Suspense`는 데이터 로딩과 같은 비동기 작업을 처리할 때, 해당 작업을 `SuspenseLane`에 할당하여 관리합니다.
-- **Fallback UI 표시:** 데이터 로딩 중인 동안, `Suspense`는 fallback UI를 표시하여 사용자에게 로딩 상태를 시각적으로 제공합니다.
-- **Lane 모델의 연계:** `Suspense`는 `TransitionLane`과 연계되어, 데이터 로딩 작업이 낮은 우선순위로 처리되도록 합니다. 이를 통해 주요 UI 업데이트가 방해받지 않도록 합니다.
-
-```jsx
-
-import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom/client';
-
-const DataFetchingComponent = React.lazy(() => import('./DataFetchingComponent'));
-
-function App() {
-  return (
-    <div>
-      <h1>My App</h1>
-      <Suspense fallback={<LoadingSpinner />}>
-        <DataFetchingComponent />
-      </Suspense>
-    </div>
-  );
-}
-
-function LoadingSpinner() {
-  return <div>Loading...</div>;
-}
-
-export default App;
-
-// DataFetchingComponent.js
-import React, { useEffect, useState } from 'react';
-
-function DataFetchingComponent() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetchData().then(response => setData(response));
-  }, []);
-
-  if (!data) {
-    throw fetchData(); // Suspense를 통해 로딩 상태 관리
-  }
-
-  return <div>Data: {data}</div>;
-}
-
-function fetchData() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve('Fetched Data');
-    }, 2000);
-  });
-}
-
-export default DataFetchingComponent;
-
-```
-
-- **설명:**
-  - `Suspense` 컴포넌트를 사용하여, `DataFetchingComponent`가 로딩 중일 때 `LoadingSpinner`를 표시합니다.
-  - `DataFetchingComponent` 내에서 데이터 로딩 작업은 `SuspenseLane`에 할당되어, 다른 높은 우선순위 작업의 방해 없이 처리됩니다.
-  - 데이터 로딩이 완료되면, 실제 데이터가 표시되며, 사용자에게 부드러운 로딩 경험을 제공합니다.
-
-### 5.5 Lane 모델과 스케줄링의 상호 작용
+### 5.3 Lane 모델과 스케줄링의 상호 작용
 
 Lane 모델과 스케줄링 시스템은 밀접하게 연관되어 있으며, 함께 작동하여 React가 다양한 우선순위의 작업을 효율적으로 처리할 수 있도록 합니다.
 
@@ -783,7 +646,7 @@ Lane 모델과 스케줄링 시스템은 밀접하게 연관되어 있으며, �
    - 스케줄링은 비동기적으로 이루어지며, 이는 메인 스레드의 블로킹을 방지하고, 사용자 인터랙션에 대한 빠른 응답성을 유지합니다.
    - React는 작업을 작은 단위로 분할하여 처리함으로써, 긴 작업이 메인 스레드를 블로킹하지 않도록 합니다.
 
-### 5.6 실제 사례: `useTransition`과 `Suspense`의 Lane 모델 활용
+### 5.4 실제 사례: `useTransition`과 `Suspense`의 Lane 모델 활용
 
 `useTransition`과 `Suspense`는 Lane 모델과 스케줄링 시스템을 활용하여, React 애플리케이션에서 비동기 작업을 효율적으로 처리하고, 사용자 경험을 향상시키는 중요한 기능들입니다.
 
@@ -921,7 +784,7 @@ Lane 모델의 핵심 기능 중 하나는 **비동기 동작을 취소할 수 �
   - Lane 모델은 Fiber 아키텍처 내에서 작업의 우선순위를 관리하면서, 특정 Lane에 속한 작업을 취소할 수 있는 메커니즘을 제공합니다.
   - 이를 통해 이전에 예약된 낮은 우선순위 작업을 취소하고, 최신 작업만을 유지할 수 있습니다.
 
-### 5.7 Lane 모델의 한계와 향후 개선점
+### 5.5 Lane 모델의 한계와 향후 개선점
 
 Lane 모델은 React의 Fiber 아키텍처에서 작업의 우선순위를 효율적으로 관리하는 데 큰 도움을 주지만, 여전히 몇 가지 한계와 향후 개선점이 존재합니다.
 
@@ -937,7 +800,7 @@ Lane 모델은 React의 Fiber 아키텍처에서 작업의 우선순위를 효�
    - 현재 Lane 모델은 제한된 수의 Lane을 지원하며, 이는 특정 시나리오에서 유연성을 제한할 수 있습니다.
    - 더 많은 Lane이 필요한 경우, 기존 모델의 확장이 어려울 수 있습니다.
 
-### 5.8 결론
+### 5.6 결론
 
 React의 Fiber 아키텍처에서 도입된 **Lane 모델**과 **스케줄링 시스템**은 작업의 우선순위를 세밀하게 관리하고, 효율적인 작업 처리를 가능하게 합니다. 이를 통해 React는 사용자 경험을 저해하지 않으면서도 복잡한 애플리케이션을 고성능으로 유지할 수 있습니다. `useTransition`과 `Suspense`와 같은 기능은 Lane 모델의 장점을 최대한 활용하여, 비동기 작업을 효율적으로 처리하고, 부드러운 사용자 경험을 제공합니다.
 

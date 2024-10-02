@@ -656,8 +656,6 @@ Lane 모델과 스케줄링 시스템은 밀접하게 연관되어 있으며, �
 - **스케줄링:** TransitionLane에 속한 작업은 높은 우선순위의 작업이 먼저 처리된 후에 처리됩니다. 이를 통해 사용자 인터랙션의 응답성을 유지합니다.
 
 ```jsx
-jsx
-코드 복사
 import React, { useState, useTransition } from 'react';
 
 function App() {
@@ -685,8 +683,8 @@ function App() {
 
 function filterList(input) {
   // 대규모 데이터 집합에서 필터링 작업
-  const allItems = [...Array(100000).keys()].map(i => `Item ${i}`);
-  return allItems.filter(item => item.includes(input));
+  const allItems = [...Array(100000).keys()].map((i) => `Item ${i}`);
+  return allItems.filter((item) => item.includes(input));
 }
 
 function FilteredList({ items }) {
@@ -700,7 +698,6 @@ function FilteredList({ items }) {
 }
 
 export default App;
-
 ```
 
 - **설명:**
@@ -715,8 +712,6 @@ export default App;
 - **Lane 모델의 연계:** `Suspense`는 `TransitionLane`과 연계되어, 데이터 로딩 작업이 낮은 우선순위로 처리되도록 합니다. 이를 통해 주요 UI 업데이트가 방해받지 않도록 합니다.
 
 ```jsx
-jsx
-코드 복사
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -852,8 +847,6 @@ React의 주요 철학 중 하나는 **선언적인 UI 업데이트**입니다. 
 2. **텍스트 선택**
 
    ```jsx
-   jsx
-   코드 복사
    import React, { useRef } from 'react';
 
    function SelectText() {
@@ -872,14 +865,11 @@ React의 주요 철학 중 하나는 **선언적인 UI 업데이트**입니다. 
    }
 
    export default SelectText;
-
    ```
 
 3. **미디어 재생 관리**
 
    ```jsx
-   jsx
-   코드 복사
    import React, { useRef } from 'react';
 
    function MediaPlayer() {
@@ -903,7 +893,6 @@ React의 주요 철학 중 하나는 **선언적인 UI 업데이트**입니다. 
    }
 
    export default MediaPlayer;
-
    ```
 
 #### 바람직한 Ref 활용 방법

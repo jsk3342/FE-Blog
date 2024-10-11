@@ -3,6 +3,7 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const { remarkCodeHike } = require('@code-hike/mdx');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -40,12 +41,14 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          remarkPlugins: [require('@code-hike/mdx')],
         },
         blog: {
           showReadingTime: true,
           editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           blogSidebarCount: 'ALL', // 사이드바에 모든 블로그 포스트를 표시
           blogSidebarTitle: 'All Posts', // 사이드바 제목 설정
+          remarkPlugins: [require('@code-hike/mdx')],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

@@ -7,7 +7,7 @@
 .stepsContainer {
   flex: 1;
   margin-top: 8rem;
-  margin-bottom: 90vh;
+  margin-bottom: 40vh;
   margin-left: 0.5rem;
   min-width: 14rem;
 }
@@ -20,7 +20,7 @@
   background-color: #8881;
 }
 
-.step[data-selected="true"] {
+.step[data-selected='true'] {
   border-left-color: #60a5fa;
 }
 
@@ -33,6 +33,7 @@
   width: 40vw;
   max-width: 36rem;
   background-color: #212121;
+  border-radius: 10px;
 }
 
 .stickyCode {

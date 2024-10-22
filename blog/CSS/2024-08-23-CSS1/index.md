@@ -12,6 +12,8 @@ tags:
   - Beginner
 ---
 
+<!-- truncate -->
+
 # 재미있는 CSS 기초
 
 - [재미있는 CSS 기초](#재미있는-css-기초)

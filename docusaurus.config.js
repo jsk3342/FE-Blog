@@ -41,17 +41,28 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          remarkPlugins: [require('@code-hike/mdx')],
+          remarkPlugins: [remarkCodeHike],
         },
         blog: {
           showReadingTime: true,
           editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           blogSidebarCount: 'ALL', // 사이드바에 모든 블로그 포스트를 표시
           blogSidebarTitle: 'All Posts', // 사이드바 제목 설정
-          remarkPlugins: [require('@code-hike/mdx')],
+          remarkPlugins: [remarkCodeHike],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+          createSitemapItems: async (params) => {
+            const { defaultCreateSitemapItems, ...rest } = params;
+            const items = await defaultCreateSitemapItems(rest);
+            return items.filter((item) => !item.url.includes('/page/'));
+          },
         },
       }),
     ],

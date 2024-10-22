@@ -16,7 +16,7 @@ function generateSidebarItems(dir) {
   entries.forEach((entry) => {
     const fullPath = path.join(dir, entry.name);
     const relativePath = path.relative('docs', fullPath).replace(/\\/g, '/');
-    const withoutExtension = relativePath.replace(/\.md$/, '');
+    const withoutExtension = relativePath.replace(/\.mdx?$/, ''); // .md와 .mdx 모두 처리
 
     if (entry.isDirectory()) {
       if (!startsWithTwoDigits(entry.name)) {
@@ -30,14 +30,19 @@ function generateSidebarItems(dir) {
           });
         }
       } else {
-        // 폴더 이름이 두 글자로 숫자로 시작하면 해당 폴더의 index.md를 아이템으로 추가
-        const indexFile = path.join(fullPath, 'index.md');
+        // 폴더 이름이 두 글자로 숫자로 시작하면 해당 폴더의 index.md 또는 index.mdx를 아이템으로 추가
+        const indexFile = path.join(fullPath, 'index.mdx'); // .mdx로 변경
+        const indexFileMd = path.join(fullPath, 'index.md'); // .md도 처리
         if (fs.existsSync(indexFile)) {
-          const itemPath = indexFile.replace(/\.md$/, '').replace(/\\/g, '/');
+          const itemPath = indexFile.replace(/\.mdx$/, '').replace(/\\/g, '/');
+          items.push(itemPath.replace(/^docs\//, ''));
+        } else if (fs.existsSync(indexFileMd)) {
+          const itemPath = indexFileMd.replace(/\.md$/, '').replace(/\\/g, '/');
           items.push(itemPath.replace(/^docs\//, ''));
         }
       }
-    } else if (entry.isFile() && entry.name === 'index.md') {
+    } else if (entry.isFile() && (entry.name === 'index.md' || entry.name === 'index.mdx')) {
+      // index.md와 index.mdx 모두 처리
       items.push(withoutExtension);
     }
   });

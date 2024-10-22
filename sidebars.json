@@ -49,6 +49,13 @@
         "dev/SICP/2024-06-27-1-1장-함수를 이용한 추상화/index"
       ]
     },
+    {
+      "type": "category",
+      "label": "StateManagement",
+      "items": [
+        "dev/StateManagement/2024-10-22-Redux-deepdive/index"
+      ]
+    },
     "dev/index"
   ]
 }

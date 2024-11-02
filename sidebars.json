@@ -56,6 +56,13 @@
         "dev/StateManagement/2024-10-22-Redux-deepdive/index"
       ]
     },
+    {
+      "type": "category",
+      "label": "VideoStreaming",
+      "items": [
+        "dev/VideoStreaming/2024-11-02-video-protocol/index"
+      ]
+    },
     "dev/index"
   ]
 }

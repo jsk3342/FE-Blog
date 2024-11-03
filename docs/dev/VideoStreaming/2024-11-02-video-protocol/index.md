@@ -4,7 +4,7 @@ authors: Jisu Kim
 title: '실시간 스트리밍 이해하기'
 description: '실시간 스트리밍 이해하기'
 category: 'video streaming'
-keywords: ['streaming', 'video']
+keywords: ['streaming', 'video', 'protocol']
 tags:
   - streaming
 ---

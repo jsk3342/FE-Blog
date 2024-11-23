@@ -1,15 +1,13 @@
 // @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
-
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import { remarkCodeHike, recmaCodeHike } from 'codehike/mdx';
 
 const chConfig = {
-  components: { code: 'MyCode' }, // 커스텀 코드 컴포넌트
+  components: { code: 'MyCode' },
   syntaxHighlighting: {
-    theme: 'github-dark', // 사용할 코드 하이라이팅 테마
+    theme: 'github-dark',
   },
 };
 
@@ -32,38 +30,77 @@ const config: Config = {
     locales: ['ko'],
   },
 
+  // 플러그인 추가
+  plugins: [
+    [
+      '@docusaurus/plugin-sitemap',
+      {
+        changefreq: 'weekly',
+        priority: 0.5,
+        ignorePatterns: ['/tags/**'],
+        filename: 'sitemap.xml',
+      },
+    ],
+    // [
+    //   '@docusaurus/plugin-google-gtag',
+    //   {
+    //     trackingID: 'G-XXXXXXXXXX', // 여기에 Google Analytics 추적 ID를 넣으세요
+    //     anonymizeIP: true,
+    //   },
+    // ],
+  ],
+
   presets: [
     [
       'classic',
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/jsk3342/my-website/edit/main/docs/', // 문서 편집 URL 수정
-          beforeDefaultRemarkPlugins: [[remarkCodeHike, chConfig]], // remarkCodeHike 추가
-          recmaPlugins: [[recmaCodeHike, chConfig]], // recmaCodeHike 추가
+          editUrl: 'https://github.com/jsk3342/my-website/edit/main/docs/',
+          beforeDefaultRemarkPlugins: [[remarkCodeHike, chConfig]],
+          recmaPlugins: [[recmaCodeHike, chConfig]],
+          showLastUpdateTime: true, // 마지막 업데이트 시간 표시
+          showLastUpdateAuthor: true, // 마지막 업데이트 작성자 표시
         },
         blog: {
           showReadingTime: true,
-          editUrl: 'https://github.com/jsk3342/my-website/edit/main/blog/', // 블로그 편집 URL 수정
+          editUrl: 'https://github.com/jsk3342/my-website/edit/main/blog/',
           blogSidebarCount: 'ALL',
           blogSidebarTitle: 'All Posts',
-          remarkPlugins: [remarkCodeHike], // 블로그에서도 remarkCodeHike 추가
+          remarkPlugins: [remarkCodeHike],
+          postsPerPage: 10, // 페이지당 포스트 수
+          blogTitle: 'FE Tech Blog',
+          blogDescription: '프론트엔드 개발 관련 기술 블로그',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
+        },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
         },
       } satisfies Preset.Options,
     ],
   ],
 
   themeConfig: {
+    // SEO 최적화를 위한 이미지 설정
     image: 'img/docusaurus-social-card.jpg',
+
+    // SEO를 위한 메타데이터 추가
+    metadata: [
+      { name: 'keywords', content: '프론트엔드, 개발, JavaScript, React, Web Development, FE Tech' },
+      { name: 'description', content: '프론트엔드 개발자의 기술 블로그입니다. 개발 경험과 지식을 공유합니다.' },
+      { name: 'og:title', content: 'FE Tech Talk' },
+      { name: 'og:description', content: '프론트엔드 개발자의 기술 블로그' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
     navbar: {
       title: 'FE Tech Talk',
       items: [
         { to: '/docs/dev/', label: '개발', position: 'left' },
         {
-          href: 'https://github.com/jsk3342/my-website', // GitHub URL 수정
+          href: 'https://github.com/jsk3342/my-website',
           label: 'GitHub',
           position: 'right',
         },
@@ -111,10 +148,10 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} FE Tech Talk, Made by JSK`,
     },
     prism: {
-      theme: prismThemes.github, // prism 테마 업데이트
-      darkTheme: prismThemes.dracula, // 다크 테마 업데이트
+      theme: prismThemes.github,
+      darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
 };
 
-export default config; // TypeScript에서 내보내기
+export default config;

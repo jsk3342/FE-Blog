@@ -34,9 +34,16 @@
             "dev/React/React-Deepdive/2024-09-28-createReact02/index"
           ]
         },
+        {
+          "type": "category",
+          "label": "React-Hook-Form",
+          "items": [
+            "dev/React/React-Hook-Form/2023-08-04-RHF/index",
+            "dev/React/React-Hook-Form/2024-11-23-React-Hook-Form/index"
+          ]
+        },
         "dev/React/2023-07-03-Zod-error-boundary/index",
         "dev/React/2023-07-13-react-router-dom/index",
-        "dev/React/2023-08-04-RHF/index",
         "dev/React/2024-09-30-rerender/index",
         "dev/React/2024-11-08-custom-snippets/index"
       ]

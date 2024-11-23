@@ -32,15 +32,6 @@ const config: Config = {
 
   // 플러그인 추가
   plugins: [
-    [
-      '@docusaurus/plugin-sitemap',
-      {
-        changefreq: 'weekly',
-        priority: 0.5,
-        ignorePatterns: ['/tags/**'],
-        filename: 'sitemap.xml',
-      },
-    ],
     // [
     //   '@docusaurus/plugin-google-gtag',
     //   {
@@ -78,6 +69,8 @@ const config: Config = {
         sitemap: {
           changefreq: 'weekly',
           priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
         },
       } satisfies Preset.Options,
     ],

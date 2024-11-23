@@ -18,6 +18,10 @@ function generateSidebarItems(dir) {
     const relativePath = path.relative('docs', fullPath).replace(/\\/g, '/');
     const withoutExtension = relativePath.replace(/\.mdx?$/, ''); // .md와 .mdx 모두 처리
 
+    if (entry.isFile() && (entry.name === 'index.md' || entry.name === 'index.mdx') && dir === 'docs/dev') {
+      return;
+    }
+
     if (entry.isDirectory()) {
       if (!startsWithTwoDigits(entry.name)) {
         // 폴더 이름이 두 글자로 시작하지 않으면 카테고리로 처리

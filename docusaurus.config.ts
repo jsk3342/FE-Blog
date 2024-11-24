@@ -32,13 +32,13 @@ const config: Config = {
 
   // 플러그인 추가
   plugins: [
-    // [
-    //   '@docusaurus/plugin-google-gtag',
-    //   {
-    //     trackingID: 'G-XXXXXXXXXX', // 여기에 Google Analytics 추적 ID를 넣으세요
-    //     anonymizeIP: true,
-    //   },
-    // ],
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-XXXXXXXXXX', // 여기에 Google Analytics 추적 ID를 넣으세요
+        anonymizeIP: true,
+      },
+    ],
   ],
 
   presets: [

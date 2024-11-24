@@ -16,7 +16,7 @@ const config: Config = {
   tagline: '개발 이야기',
   favicon: 'img/favicon.ico',
 
-  url: 'https://jskdevblog.vercel.app/',
+  url: 'https://jskdev.vercel.app/',
   baseUrl: '/',
 
   organizationName: 'Jisu Kim',

@@ -30,6 +30,18 @@ const config: Config = {
     locales: ['ko'],
   },
 
+  // 🚀 애드센스 코드 추가
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {
+        async: true,
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6790909497221117',
+        crossorigin: 'anonymous',
+      },
+    },
+  ],
+
   // 플러그인 추가
   plugins: [
     [

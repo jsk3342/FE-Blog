@@ -35,7 +35,7 @@ const config: Config = {
     {
       tagName: 'script',
       attributes: {
-        async: true,
+        async: '', // true → '' (빈 문자열)로 변경
         src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6790909497221117',
         crossorigin: 'anonymous',
       },

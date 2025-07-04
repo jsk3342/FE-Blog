@@ -33,11 +33,10 @@ const config: Config = {
   // 🚀 애드센스 코드 추가
   headTags: [
     {
-      tagName: 'script',
+      tagName: 'meta',
       attributes: {
-        async: '', // true → '' (빈 문자열)로 변경
-        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6790909497221117',
-        crossorigin: 'anonymous',
+        name: 'google-adsense-account',
+        content: 'ca-pub-6790909497221117',
       },
     },
   ],

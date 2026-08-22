@@ -36,6 +36,9 @@
     "url": "^0.11.4",
     "zod": "^3.23.8"
   },
+  "resolutions": {
+    "webpack": "5.104.1"
+  },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.5.2",
     "@docusaurus/tsconfig": "3.5.2",

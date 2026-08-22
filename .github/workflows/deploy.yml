@@ -20,9 +20,9 @@ jobs:
         with:
           node-version: '18' # package.json의 엔진과 일치
 
-      # 3. 의존성 설치
+      # 3. 의존성 설치 (Vercel과 동일하게 yarn.lock 기준)
       - name: Install Dependencies
-        run: npm install
+        run: yarn install --frozen-lockfile
 
       # 4. 프리빌드 실행
       - name: Run Prebuild Script

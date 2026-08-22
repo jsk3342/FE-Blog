@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # package.json의 엔진과 일치
+          node-version: '24' # Vercel 실제 빌드 환경과 일치 (engines ">=18.0" -> 최신 major 사용)
 
       # 3. 의존성 설치 (Vercel과 동일하게 yarn.lock 기준)
       - name: Install Dependencies
